@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { ScrollView, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import { IconBack, IllustrationRegisterImage } from '../../assets';
 import { Button, Input } from '../../components';
 import { colors } from '../../utils';
 
 const Register = () => {
+
+  const RegisterReducer = useSelector(state => state.RegisterReducer);
+
+  useEffect(() => {
+    console.log('global: ', RegisterReducer);
+  }, [RegisterReducer]);
 
   const sendData = () => {
     console.log('Data yang kirim: ', form);
@@ -31,7 +39,7 @@ const Register = () => {
         <View style={{alignItems:'center'}}>
         <IllustrationRegisterImage style={styles.illustration} />
           <Text style={styles.text.desc}>
-            Please fill in some data to process your list.
+            {RegisterReducer.desc}
           </Text>
         </View>
 
