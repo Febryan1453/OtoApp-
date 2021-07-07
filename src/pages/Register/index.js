@@ -1,29 +1,67 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, Text, View } from 'react-native';
 import { IconBack, IllustrationRegisterImage } from '../../assets';
-import { Input } from '../../components';
+import { Button, Input } from '../../components';
 import { colors } from '../../utils';
 
 const Register = () => {
+
+  const sendData = () => {
+    console.log('Data yang kirim: ', form);
+  };  
+
+  const [form, setForm] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+  });
+
+  const onInputChange = (value, input) => {
+    setForm({
+      ...form,
+      [input]: value,
+    });
+  };
+
     return (
     <View style={styles.wrapper.page}>
-      <IconBack style={styles.iconBack} />
-      {/* <View style={styles.illustration} /> */}
-      <View style={{alignItems:'center'}}>
-      <IllustrationRegisterImage style={styles.illustration} />     
-       
-        <Text style={styles.text.desc}>
-          Please fill in some data to process your list.
-        </Text>
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <IconBack style={styles.iconBack} />
+        {/* <View style={styles.illustration} /> */}
+        <View style={{alignItems:'center'}}>
+        <IllustrationRegisterImage style={styles.illustration} />
+          <Text style={styles.text.desc}>
+            Please fill in some data to process your list.
+          </Text>
+        </View>
 
-        <View style={styles.space(54)} />
-        <Input placeholder="Full name" />
-        <View style={styles.space(33)} />
-        <Input placeholder="Email" />
-        <View style={styles.space(33)} />
-        <Input placeholder="Password" />
+          <View style={styles.space(54)} />
 
+          <Input 
+            placeholder="Full name" 
+            value={form.fullName} 
+            onChangeText={(value) => onInputChange(value, 'fullName')} 
+          />
+
+          <View style={styles.space(25)} />
+
+          <Input 
+            placeholder="Email" 
+            value={form.email} 
+            onChangeText={(value) => onInputChange(value, 'email')} 
+          />
+
+          <View style={styles.space(25)} />
+
+          <Input 
+            placeholder="Password" 
+            value={form.password} 
+            onChangeText={(value) => onInputChange(value, 'password')} 
+            secureTextEntry={true}
+          />
+          <View style={styles.space(40)} />
+          <Button title="registrasi" onPress={sendData} />
+      </ScrollView>
     </View>
     );
 };

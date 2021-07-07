@@ -2,10 +2,11 @@ import React from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import { colors } from '../../../utils';
 
-const Input = ({placeholder}) => {
+const Input = ({placeholder, ...rest}) => {
     return (
             <TextInput 
                 style={styles.input} 
+                {...rest}
                 placeholder={placeholder} 
                 placeholderTextColor={colors.default} />
     );
