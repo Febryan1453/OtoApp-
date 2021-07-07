@@ -4,7 +4,12 @@ import { welcomeAuth } from '../../assets';
 import { colors } from '../../utils';
 import ActionButton from './ActionButton';
 
-const WelcomeAuth = () => {
+const WelcomeAuth = ({navigation}) => {
+
+  const handleGoTo = screen => {
+    navigation.navigate(screen);
+  };
+
     return(
     <View style={styles.wrapper.page}>
       {/* <View style={styles.wrapper.ilustration} /> */}
@@ -16,12 +21,14 @@ const WelcomeAuth = () => {
       <ActionButton 
         desc="Please select login,
 if you already have an account." 
-        title="Login"/>
+        title="Login"
+        onPress={() => handleGoTo('Login')}/>
 
       <ActionButton 
         desc="Or
 Please register, if you don't have an account yet." 
-        title="Register"/>
+        title="Register"
+        onPress={() => handleGoTo('Register')}/>
     </View>
     
     );
