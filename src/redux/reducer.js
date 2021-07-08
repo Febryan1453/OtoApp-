@@ -5,8 +5,13 @@ import { combineReducers } from "redux";
 // };
 
 const initialStateRegister = {
+    form:{
+        fullName: '',
+        email: '',
+        password: '',
+    },
     title: 'Register Page',
-    desc: 'Please fill in some data to process your list.',
+    desc: 'Desc Register',
 };
 
 const initialStateLogin = {
@@ -15,6 +20,24 @@ const initialStateLogin = {
 };
 
 const RegisterReducer = (state = initialStateRegister, action) => {
+    if(action.type === 'SET_TITLE'){
+        return{
+            ...state,
+            title: 'Ganti',
+        };
+    }
+
+    if(action.type === 'SET_FORM'){
+        return{
+            ...state,
+            form:{
+                ...state.form,
+                [action.inputType]: action.inputValue,
+            }
+            
+        };
+    }
+
     return state;
 };
 

@@ -1,34 +1,41 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IconBack, IllustrationRegisterImage } from '../../assets';
 import { Button, Input } from '../../components';
+import { setForm } from '../../redux';
 import { colors } from '../../utils';
 
 const Register = () => {
 
-  const RegisterReducer = useSelector(state => state.RegisterReducer);
+  const {form} = useSelector(state => state.RegisterReducer);
 
-  useEffect(() => {
-    console.log('global: ', RegisterReducer);
-  }, [RegisterReducer]);
+  // useEffect(() => {
+  //   console.log('global: ', RegisterReducer);
+  // }, [RegisterReducer]);
 
   const sendData = () => {
     console.log('Data yang kirim: ', form);
-  };  
+  };
+  
+  const dispatch = useDispatch();
 
-  const [form, setForm] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-  });
+  // const [form, setForm] = useState({
+  //   fullName: '',
+  //   email: '',
+  //   password: '',
+  // });
 
   const onInputChange = (value, input) => {
-    setForm({
-      ...form,
-      [input]: value,
-    });
+    // setForm({
+    //   ...form,
+    //   [input]: value,
+    // });
+
+    // type adalah parameter yang wajib pada dispatch untuk keperluan di reducer
+    // dispatch(setForm(Input, value));
+    dispatch({type: 'SET_FORM', inputType: input, inputValue: value});
   };
 
     return (
@@ -39,7 +46,7 @@ const Register = () => {
         <View style={{alignItems:'center'}}>
         <IllustrationRegisterImage style={styles.illustration} />
           <Text style={styles.text.desc}>
-            {RegisterReducer.desc}
+          Please fill in some data to process your list.
           </Text>
         </View>
 
