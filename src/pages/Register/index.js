@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { IconBack, IllustrationRegisterImage } from '../../assets';
+import { useDispatch, useSelector } from 'react-redux';
+import { IllustrationRegisterImage } from '../../assets';
 import { Button, Input } from '../../components';
-import { setForm } from '../../redux';
 import { colors } from '../../utils';
 
-const Register = () => {
+// ALT + Shift + O ====> untuk mengapus objek yg ga ke pake
+
+const Register = ({navigation}) => {
 
   const {form} = useSelector(state => state.RegisterReducer);
 
@@ -41,7 +41,8 @@ const Register = () => {
     return (
     <View style={styles.wrapper.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <IconBack style={styles.iconBack} />
+        {/* <IconBack style={styles.iconBack} /> */}
+        <Button type="icon" name="back" onPress={() => navigation.goBack()} />
         {/* <View style={styles.illustration} /> */}
         <View style={{alignItems:'center'}}>
         <IllustrationRegisterImage style={styles.illustration} />
